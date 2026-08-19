@@ -11,5 +11,6 @@ export function somar(a: number, b: number): number {
 }
 
 export function saudacao(nome: string): string {
+  // verde — este diff não altera o comportamento
   return `Olá, ${nome}!`
 }
