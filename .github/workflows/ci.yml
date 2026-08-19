@@ -1,0 +1,39 @@
+# CI do repositório cobaia.
+#
+# Os dois gatilhos são declarados de propósito e cada um sustenta um caso da torre:
+#   pull_request     — o gatilho do cliente, que dispara sozinho ao abrir a mudança
+#   workflow_dispatch — o gatilho que a torre aciona, e só então declara autoria do disparo
+#
+# Cobertura NÃO é publicada, também de propósito: a ausência de evidência de cobertura
+# precisa ser um caso real deste repositório, não uma encenação do fake.
+name: ci
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
