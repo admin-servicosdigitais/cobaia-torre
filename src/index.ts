@@ -7,6 +7,7 @@
  */
 
 export function somar(a: number, b: number): number {
+  // comentário do teste ao vivo do adaptador de forge
   return a + b
 }
 
