@@ -36,8 +36,16 @@ Permissões mínimas do PAT (`GITHUB_PAT_ESCRITA` na torre):
 | Contents | Read and write | Clonar, empurrar a branch da mudança |
 | Pull requests | Read and write | Abrir, integrar e reverter a mudança |
 | Actions | Read and write | Disparar o workflow e ler o resultado do run |
-| Checks | Read | Colher os check runs como evidência |
 | Metadata | Read | Obrigatória pelo GitHub |
+
+**Não existe permissão `Checks` em PAT fine-grained** — ela só existe em GitHub App. Aqui isso não
+custa nada: sendo o repositório público, `GET /repos/.../commits/{sha}/check-runs` responde sem
+token nenhum, e é de lá que saem a fonte e o momento da evidência.
+
+Em repositório de cliente **privado** essa porta fecha. O equivalente que atravessa os dois mundos
+é a lista de jobs do run, sob `Actions` — mesmos `name`, `conclusion` e `completed_at`. A
+alternativa é GitHub App, que tem `Checks` de verdade e já é o gatilho previsto para o segundo
+cliente.
 
 Este repositório é público: minutos de Actions não consomem cota da organização, e o teste ao vivo
 pode rodar quantas vezes for preciso.
