@@ -7,6 +7,7 @@
  */
 
 export function somar(a: number, b: number): number {
+  // ciclo do worker — teste ao vivo #135
   return a + b
 }
 
